@@ -1,0 +1,12 @@
+for chatbot install important package or laiberi
+1. chatterbot
+2. chatterbot-corpus
+3. pyyaml
+4. python -m spacy download en_core_web_sm
+5. spacy
+6. jupyer
+7. flask
+
+8. pip install pint -> using unit for physical quantities with units like meters, seconds, kilograms.
+
+spacy download============ python -m spacy download en_core_web_sm
