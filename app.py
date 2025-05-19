@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer , ChatterBotCorpusTrainer
-from transformers import AutoModelForCausalLM, AutoTokenizer
+# from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import requests
 
@@ -44,17 +44,17 @@ def google_search(query):
     return None
 
 
-model_name="EleutherAI/gpt-neo-2.7B"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype=torch.float16)
+# model_name="EleutherAI/gpt-neo-2.7B"
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
+# model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype=torch.float16)
 
-def genarete_response(prompt):
-    inputs = tokenizer(prompt, return_tensors="pt")
-    inputs = {k: v.to(model.device) for k, v in inputs.items()}
-    outputs = model.generate(**inputs, max_new_tokens=150, do_sample=True, temperature=0.9)
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print("Model raw response:", response)
-    return response.strip()
+# def genarete_response(prompt):
+#     inputs = tokenizer(prompt, return_tensors="pt")
+#     inputs = {k: v.to(model.device) for k, v in inputs.items()}
+#     outputs = model.generate(**inputs, max_new_tokens=150, do_sample=True, temperature=0.9)
+#     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+#     print("Model raw response:", response)
+#     return response.strip()
 
 
 
@@ -126,9 +126,9 @@ def chat():
         bot_response = bot.get_response(user_message)
         if bot_response.confidence <0.5:
         # 0 case
-            llm_answer=genarete_response(user_message)
-            if llm_answer:
-                return jsonify({"response":llm_answer})
+            # llm_answer=genarete_response(user_message)
+            # if llm_answer:
+            #     return jsonify({"response":llm_answer})
         # 1 case
             serch_answer=duckduckgo_search(user_message)
             if serch_answer:
